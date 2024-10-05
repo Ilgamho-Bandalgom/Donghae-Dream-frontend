@@ -1,0 +1,287 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.section {
+  width: 100%;
+  height: 50%; /* Divide screen into two halves */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  z-index: 1; /* Ensure sections are behind the VS image */
+}
+
+.vs {
+  width: 300px;
+  height: 300px;
+  background-image: url("./asset/vs.png"); /* Ensure this path is correct */
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute;
+  top: 50%; /* Center it vertically */
+  left: 50%; /* Center it horizontally */
+  transform: translate(-50%, -50%);
+  z-index: 10; /* Ensure the VS image is on top */
+}
+
+.upper-section {
+  background-color: #add8e6; /* Light blue background */
+  z-index: 1;
+}
+
+.lower-section {
+  background-color: #00008b; /* Dark blue background */
+  color: #fff;
+  z-index: 1;
+}
+
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 36px;
+  cursor: pointer;
+  color: black;
+  z-index: 5;
+}
+
+.image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  font-size: 24px; /* Increase the font size for the description */
+}
+
+.image svg {
+  font-size: 100px; /* Increase the size of the Material UI icons */
+}
+
+.image p {
+  margin-top: 10px;
+  font-size: 1.5em; /* Increase the font size of the description text */
+}
+
+.title {
+  font-size: 32px; /* Larger title */
+  text-align: center;
+  margin-bottom: 100px;
+}
+
+.large-checkbox {
+  width: 25px;
+  height: 25px;
+  margin-right: 15px;
+}
+
+.large-icon {
+  font-size: 28px;
+  margin-right: 15px;
+  color: #6e8efb;
+}
+
+.question-text {
+  font-size: 18px;
+}
+
+.input-container {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 15px;
+  padding: 30px;
+  margin-top: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 600px;
+  text-align: center;
+}
+
+.age p {
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.input-al {
+  width: 100%;
+  max-width: 200px;
+  padding: 12px;
+  font-size: 18px;
+  border: 2px solid #6e8efb;
+  border-radius: 8px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.input-al:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(110, 142, 251, 0.3);
+}
+
+.footer {
+  margin-top: 30px;
+  width: 90%;
+  max-width: 600px;
+  display: flex;
+  justify-content: center;
+}
+
+.complete-button {
+  background: linear-gradient(135deg, #6e8efb, #5da9e9);
+  border: none;
+  color: white;
+  padding: 15px 30px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.complete-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(135deg, #5d7df9, #5da9e9);
+}
+
+.complete-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.survey-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full height to ensure vertical centering */
+  padding: 0;
+  width: 100%;
+  position: relative;
+  transition: opacity 1s ease-in-out; /* Keep the transition effect */
+}
+
+.header {
+  display: flex;
+  margin-bottom: 10px;
+  justify-content: center; /* Ensure the title is centered horizontally */
+  align-items: center;
+  width: 100%; /* Full width */ /* Padding for better spacing */
+}
+
+.checklist-items {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 600px;
+  margin-bottom: 30px;
+}
+
+.checklist-item {
+  background-color: white;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+}
+
+.footer {
+  position: fixed;
+  bottom: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: center; /* Center the complete button */
+}
+
+.complete-button {
+  background: linear-gradient(135deg, #4caf50, #45a049);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  margin-top: 20px;
+}
+
+.complete-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+input[type="number"] {
+  font-size: 24px;
+  width: 100px;
+  padding: 10px;
+  text-align: center;
+}
+
+/* 애니메이션 클래스 */
+.animate_content {
+  animation: animate 3s ease;
+}
+
+@keyframes animate {
+  10% {
+    transform: scale(1, 0.002);
+  }
+  35% {
+    transform: scale(0.2, 0.002);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(0.2, 0.002);
+    opacity: 0;
+  }
+  85% {
+    transform: scale(1, 0.002);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}
+
+.fadeIn {
+  z-index: 10;
+}
+
+/* 섹션 클릭 시 하늘색 배경 */
+.section.clicked {
+  background-color: #5da9e9;
+  transition: background-color 0.5s ease;
+}
+
+.full-screen {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #6e8efb, #5da9e9);
+}
+
+.full-screen::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='rgba(255,255,255,0.1)' fill-opacity='1' d='M0,128L48,144C96,160,192,192,288,197.3C384,203,480,181,576,165.3C672,149,768,139,864,154.7C960,171,1056,213,1152,218.7C1248,224,1344,192,1392,176L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+  background-size: cover;
+  background-position: center;
+  opacity: 0.5;
+  z-index: -1;
+}
+
+.survey-container.full-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 20px;
+}

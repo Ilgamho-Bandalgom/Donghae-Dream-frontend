@@ -1,0 +1,68 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full height of the viewport for centering */
+  background-color: #ffffff; /* Background color */
+  position: relative; /* Set relative position for absolute child elements */
+  overflow: hidden; /* Prevent content overflow */
+}
+
+/* Center internal elements */
+.login-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1; /* Ensure the content is above the canvas */
+}
+
+/* Replacing the img tag with a div for the logo */
+.logo {
+  width: 300px;
+  height: 300px;
+  background-image: url("./asset/Logo.png"); /* Ensure this path is correct */
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: white; /* Optional: Background color */
+}
+
+/* Kakao login button styling */
+.kakao-login-button {
+  width: 300px;
+  height: 100px;
+  background-image: url("./asset/kakao_login_large_wide.png"); /* Ensure the path is correct */
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none; /* Remove borders */
+  cursor: pointer;
+  margin: 20px auto;
+  background-color: transparent;
+  z-index: 1; /* Ensure the button is above the canvas */
+}
+
+.kakao-login-button:hover {
+  opacity: 0.8; /* Button effect on hover */
+}
+
+/* General rule to remove borders for all elements */
+.kakao-login-button {
+  border: none !important;
+  outline: none !important;
+}
+
+/* Styles for the wave canvas */
+.wave-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0; /* Place it behind the other content */
+  transition: transform 2s ease-in-out;
+}
+
+.wave-canvas.animating {
+  transform: translateY(-100%);
+}
