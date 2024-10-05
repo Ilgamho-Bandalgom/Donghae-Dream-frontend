@@ -53,49 +53,58 @@ const KakaoMap = () => {
   const addMarker = (map, lat, lon, isCustom = null) => {
     const position = new window.kakao.maps.LatLng(lat, lon);
 
-    let customContent = `
-      <div style="
-        background-image: url('${imageSrc_before}');
-        background-size: contain;
-        background-position: center;
-        width: 50px;
-        height: 50px;
-      "></div>
-    `;
+    if (!isCustom) {
+      // 기본 마커 생성
+      const marker = new window.kakao.maps.Marker({
+        position: position,
+      });
+      marker.setMap(map);
+    } else {
+      // 커스텀 마커 생성
+      let customContent = `
+        <div style="
+          background-image: url('${imageSrc_before}');
+          background-size: contain;
+          background-position: center;
+          width: 50px;
+          height: 50px;
+        "></div>
+      `;
 
-    const customOverlay = new window.kakao.maps.CustomOverlay({
-      position: position,
-      content: customContent,
-      yAnchor: 1,
-    });
+      const customOverlay = new window.kakao.maps.CustomOverlay({
+        position: position,
+        content: customContent,
+        yAnchor: 1,
+      });
 
-    customOverlay.setMap(map);
+      customOverlay.setMap(map);
 
-    // 클릭 이벤트 설정
-    window.kakao.maps.event.addListener(map, "click", (event) => {
-      const clickLat = event.latLng.getLat();
-      const clickLon = event.latLng.getLng();
+      // 클릭 이벤트 설정
+      window.kakao.maps.event.addListener(map, "click", (event) => {
+        const clickLat = event.latLng.getLat();
+        const clickLon = event.latLng.getLng();
 
-      // 클릭한 위치와 마커 위치 간 거리 계산
-      const distance = getDistance(lat, lon, clickLat, clickLon);
+        // 클릭한 위치와 마커 위치 간 거리 계산
+        const distance = getDistance(lat, lon, clickLat, clickLon);
 
-      if (distance <= RADIUS_THRESHOLD) {
-        // 커스텀 오버레이 이미지를 변경
-        customContent = `
-          <div style="
-            background-image: url('${imageSrc_after}');
-            background-size: contain;
-            background-position: center;
-            width: 50px;
-            height: 50px;
-          "></div>
-        `;
-        customOverlay.setContent(customContent);
+        if (distance <= RADIUS_THRESHOLD) {
+          // 커스텀 오버레이 이미지를 변경
+          customContent = `
+            <div style="
+              background-image: url('${imageSrc_after}');
+              background-size: contain;
+              background-position: center;
+              width: 50px;
+              height: 50px;
+            "></div>
+          `;
+          customOverlay.setContent(customContent);
 
-        // 서버에 위치 정보 전송
-        updateStampOnServer(lat, lon);
-      }
-    });
+          // 서버에 위치 정보 전송
+          updateStampOnServer(lat, lon);
+        }
+      });
+    }
   };
 
   useEffect(() => {
@@ -165,7 +174,7 @@ const KakaoMap = () => {
           map.addControl(zoomControl, window.kakao.maps.ControlPosition.RIGHT);
 
           // 기본 좌표에 커스텀 마커 추가
-          addMarker(map, 33.450701, 126.570667, "before");
+          addMarker(map, 33.450701, 126.570667, null);
         }
       });
     };
