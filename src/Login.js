@@ -2,6 +2,8 @@ import React, { useEffect, useRef } from "react";
 import "./LoginButton.css"; // Import the CSS file for styling
 import { Wave } from "./Wave"; // Ensure to import the Wave class
 
+// 로그인 어케 하죠?
+
 const Login = () => {
   const REACT_APP_REST_API_KEY = process.env.REACT_APP_REST_API_KEY;
   const REDIRECT_URI = `http://localhost:3000/oauth`; // Update with your correct URI if necessary

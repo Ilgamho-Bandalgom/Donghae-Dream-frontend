@@ -1,5 +1,22 @@
 import React, { useEffect, useState } from "react";
 
+// POST로 요청
+// JWT  : String 형태의 local storage에 저장된 값
+// request : "stamps"
+
+// POST로 응답
+// stamps : [
+//   {
+//     latitude: 33.450701,
+//     longitude: 126.570667,
+//   }
+//  {
+//     latitude: 33.450701,
+//     longitude: 126.570667,
+//   }
+// ...
+// ]
+
 const KakaoMap = () => {
   const [map, setMap] = useState(null);
   const [stamps, setStamps] = useState([]);

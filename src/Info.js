@@ -1,27 +1,56 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import IconButton from "@mui/material/IconButton";
 import EditIcon from "@mui/icons-material/Edit";
 import "./Info.css";
 
-const Info = ({ data }) => {
+// POST로 요청
+// JWT  : String 형태의 local storage에 저장된 값
+// request : "info"
+
+// POST로 응답
+//  : [
+// {이름: "강민주"},
+// {나이: 22},
+// {정적_활동적: "정적"},
+// {자연_도시: "도시"},
+// {혼자_단체: "혼자"},
+// {내국인_외국인: "내국인"},
+// {자녀유무: true},
+// {채식주의자: true},
+// {할랄푸드: false},
+// {장애유무: true},
+//]
+
+const Info = () => {
   const navigate = useNavigate();
+  const [userInfo, setUserInfo] = useState(null);
 
-  // 예시 데이터 (임시로 사용)
-  const exampleData = {
-    이름: "강민주",
-    나이: 22,
-    정적_활동적: "정적",
-    자연_도시: "도시",
-    혼자_단체: "혼자",
-    내국인_외국인: "내국인",
-    자녀유무: true,
-    채식주의자: true,
-    할랄푸드: false,
-    장애유무: true,
-  };
+  useEffect(() => {
+    // 요청 부분
+    const fetchData = async () => {
+      try {
+        const jwt = localStorage.getItem("JWT"); // JWT 가져오기
+        const response = await axios.post("YOUR_API_ENDPOINT", {
+          JWT: jwt,
+          request: "info",
+        });
 
-  // 서버에서 받은 데이터를 구조 분해 할당
+        // 응답 부분
+        setUserInfo(response.data); // 서버로부터 받은 데이터를 상태에 저장
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (!userInfo) {
+    return <div>Loading...</div>; // 데이터 로딩 중 표시
+  }
+
   const {
     이름,
     나이,
@@ -33,9 +62,8 @@ const Info = ({ data }) => {
     채식주의자,
     할랄푸드,
     장애유무,
-  } = data || exampleData; // data가 없으면 exampleData 사용
+  } = userInfo;
 
-  // 특징을 모아서 하나의 문자열로 생성
   const 특징 = [
     자녀유무 ? "자녀 있음" : null,
     채식주의자 ? "채식주의자" : null,
@@ -43,7 +71,6 @@ const Info = ({ data }) => {
     장애유무 ? "장애 있음" : null,
   ].filter(Boolean);
 
-  // "수정하기" 버튼 클릭 시 survey 페이지로 이동
   const handleEditClick = () => {
     navigate("/survey");
   };

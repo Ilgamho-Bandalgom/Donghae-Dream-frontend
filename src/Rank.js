@@ -9,11 +9,11 @@ const Rank = () => {
   };
 
   const rankings = [
-    { rank: 1, name: "김철수", points: 5000 },
-    { rank: 2, name: "이영희", points: 4800 },
-    { rank: 3, name: "박지성", points: 4600 },
-    { rank: 4, name: "정소연", points: 4400 },
-    { rank: 5, name: "최동훈", points: 4200 },
+    { rank: 1, name: "강민주", points: 5000 },
+    { rank: 2, name: "김지현", points: 4800 },
+    { rank: 3, name: "정윤아", points: 4600 },
+    { rank: 4, name: "강성우", points: 4400 },
+    { rank: 5, name: "홍길동", points: 4200 },
     // ... 더 많은 랭킹 데이터 추가
   ];
 
@@ -48,3 +48,4 @@ const Rank = () => {
 };
 
 export default Rank;
+ㄴ;

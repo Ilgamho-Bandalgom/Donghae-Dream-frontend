@@ -17,6 +17,23 @@ import {
   Bed as BedIcon,
 } from "@mui/icons-material"; // Fixed import for BedIcon
 
+//POST로 전달
+//JWT : String 형태의 local storage에 저장된 값
+//request : "survey"
+
+//POST로 응답
+//: {
+// 혼자_단체: "혼자",
+// 자연_도시: "자연",
+// 정적_활동적: "정적",
+// 내국인_외국인: "내국인",
+// 채식주의자: true,
+// 할랄푸드: true,
+// 자녀유무: true,
+// 장애유무: true,
+// 나이: 22,
+// }
+
 const SurveyContainer = ({
   describe,
   icon: Icon,

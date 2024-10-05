@@ -1,30 +1,48 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "./Plan.css";
+
+// POST로 요청
+// JWT  : String 형태의 local storage에 저장된 값
+// request : "plan"
+
+// POST로 응답
+// plan : [
+// {
+// 이름 : "관광 / 식당 이름"
+// 위치 : "관광 / 식당 위치"
+// 포인트 : "관광 / 식당 평점"
+// }
+// ]
+
+// POST로 전달
+// JWT : String 형태의 local storage에 저장된 값
+// {선택한 곳들의 정보} ...
 
 const Plan = () => {
   const [selectedCategory, setSelectedCategory] = useState("restaurant");
   const [selectedItems, setSelectedItems] = useState({});
+  const [planData, setPlanData] = useState([]);
 
-  const categories = {
-    restaurant: [
-      { id: 1, name: "한식", location: "서울시 강남구", point: 4.5 },
-      { id: 2, name: "양식", location: "서울시 마포구", point: 4.2 },
-      { id: 3, name: "중식", location: "서울시 중구", point: 4.0 },
-      { id: 4, name: "일식", location: "서울시 서초구", point: 4.7 },
-      { id: 5, name: "분식", location: "서울시 종로구", point: 3.8 },
-      { id: 6, name: "카페", location: "서울시 용산구", point: 4.3 },
-      { id: 7, name: "베이커리", location: "서울시 송파구", point: 4.1 },
-    ],
-    tourism: [
-      { id: 8, name: "산", location: "경기도 가평군", point: 4.8 },
-      { id: 9, name: "바다", location: "부산시 해운대구", point: 4.6 },
-      { id: 10, name: "박물관", location: "서울시 용산구", point: 4.4 },
-      { id: 11, name: "미술관", location: "서울시 종로구", point: 4.2 },
-      { id: 12, name: "놀이공원", location: "경기도 용인시", point: 4.5 },
-      { id: 13, name: "역사유적지", location: "경주시", point: 4.7 },
-      { id: 14, name: "공원", location: "서울시 송파구", point: 4.0 },
-    ],
-  };
+  useEffect(() => {
+    // 요청 부분: 서버로부터 plan 데이터를 가져옴
+    const fetchPlanData = async () => {
+      try {
+        const jwt = localStorage.getItem("JWT"); // JWT 가져오기
+        const response = await axios.post("YOUR_API_ENDPOINT", {
+          JWT: jwt,
+          request: "plan",
+        });
+
+        // 응답 부분: 서버로부터 받은 plan 데이터를 상태에 저장
+        setPlanData(response.data.plan);
+      } catch (error) {
+        console.error("Error fetching plan data:", error);
+      }
+    };
+
+    fetchPlanData();
+  }, []);
 
   const handleItemClick = (item) => {
     setSelectedItems((prevState) => {
@@ -37,6 +55,19 @@ const Plan = () => {
       console.log(JSON.stringify(newState, null, 2)); // JSON 형식으로 콘솔에 출력
       return newState;
     });
+  };
+
+  const sendSelectedItems = async () => {
+    try {
+      const jwt = localStorage.getItem("JWT");
+      await axios.post("YOUR_API_ENDPOINT", {
+        JWT: jwt,
+        selectedItems: Object.values(selectedItems), // 선택한 곳들의 정보
+      });
+      console.log("Selected items sent to server:", selectedItems);
+    } catch (error) {
+      console.error("Error sending selected items:", error);
+    }
   };
 
   return (
@@ -57,21 +88,24 @@ const Plan = () => {
       </div>
       <div className="subcategory-container">
         <div className="subcategory-list">
-          {categories[selectedCategory].map((item) => (
-            <div
-              key={item.id}
-              className={`subcategory-item ${
-                selectedItems[item.id] ? "selected" : ""
-              }`}
-              onClick={() => handleItemClick(item)}
-            >
-              <h3>{item.name}</h3>
-              <p>위치: {item.location}</p>
-              <p>평점: {item.point}</p>
-            </div>
-          ))}
+          {planData
+            .filter((item) => item.category === selectedCategory)
+            .map((item) => (
+              <div
+                key={item.id}
+                className={`subcategory-item ${
+                  selectedItems[item.id] ? "selected" : ""
+                }`}
+                onClick={() => handleItemClick(item)}
+              >
+                <h3>{item.name}</h3>
+                <p>위치: {item.location}</p>
+                <p>평점: {item.point}</p>
+              </div>
+            ))}
         </div>
       </div>
+      <button onClick={sendSelectedItems}>선택한 장소 서버로 보내기</button>
     </div>
   );
 };
