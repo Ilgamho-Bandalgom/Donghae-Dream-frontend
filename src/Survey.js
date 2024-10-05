@@ -19,10 +19,7 @@ import {
 
 //POST로 전달
 //JWT : String 형태의 local storage에 저장된 값
-//request : "survey"
-
-//POST로 응답
-//: {
+//survey: {
 // 혼자_단체: "혼자",
 // 자연_도시: "자연",
 // 정적_활동적: "정적",
