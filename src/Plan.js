@@ -7,13 +7,18 @@ import "./Plan.css";
 // request : "plan"
 
 // POST로 응답
-// plan : [
 // {
-// 이름 : "관광 / 식당 이름"
-// 위치 : "관광 / 식당 위치"
-// 포인트 : "관광 / 식당 평점"
+//   plan: [
+//     {
+//       id: "1",
+//       name: "Place Name",
+//       location: "Location",
+//       point: 4.5,
+//       category: "restaurant"
+//     },
+//     // ... more items
+//   ]
 // }
-// ]
 
 // POST로 전달
 // JWT : String 형태의 local storage에 저장된 값
@@ -34,7 +39,7 @@ const Plan = () => {
           request: "plan",
         });
 
-        // 응답 부분: 서버로부터 받은 plan 데이터를 상태에 저장
+        // 응답 부분: 서버로부�� 받은 plan 데이터를 상태에 저장
         setPlanData(response.data.plan);
       } catch (error) {
         console.error("Error fetching plan data:", error);
@@ -62,6 +67,7 @@ const Plan = () => {
       const jwt = localStorage.getItem("JWT");
       await axios.post("YOUR_API_ENDPOINT", {
         JWT: jwt,
+        request: "plan", // 요청을 "plan"으로 설정
         selectedItems: Object.values(selectedItems), // 선택한 곳들의 정보
       });
       console.log("Selected items sent to server:", selectedItems);
