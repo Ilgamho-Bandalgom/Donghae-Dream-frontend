@@ -48,4 +48,3 @@ const Rank = () => {
 };
 
 export default Rank;
-ㄴ;
