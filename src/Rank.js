@@ -1,7 +1,50 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import "./Rank.css";
 
 const Rank = () => {
-  return <h1> 랭킹 페이지 </h1>;
+  const myRank = {
+    rank: 15,
+    name: "사용자",
+    points: 1250,
+  };
+
+  const rankings = [
+    { rank: 1, name: "김철수", points: 5000 },
+    { rank: 2, name: "이영희", points: 4800 },
+    { rank: 3, name: "박지성", points: 4600 },
+    { rank: 4, name: "정소연", points: 4400 },
+    { rank: 5, name: "최동훈", points: 4200 },
+    // ... 더 많은 랭킹 데이터 추가
+  ];
+
+  return (
+    <div className="rank-container">
+      <div className="my-rank">
+        <h1>내 랭킹 정보</h1>
+        <div className="my-rank-info">
+          <div className="my-rank-item">
+            <span className="my-rank-label">랭킹</span>
+            <span className="my-rank-value">{myRank.rank}위</span>
+          </div>
+          <div className="my-rank-item">
+            <span className="my-rank-label">포인트</span>
+            <span className="my-rank-value">{myRank.points}</span>
+          </div>
+        </div>
+      </div>
+      <div className="rankings-container">
+        <div className="rankings-list">
+          {rankings.map((item, index) => (
+            <div key={index} className="ranking-item">
+              <span className="rank">{item.rank}</span>
+              <span className="name">{item.name}</span>
+              <span className="points">{item.points}점</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default Rank;

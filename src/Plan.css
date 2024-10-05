@@ -1,0 +1,94 @@
+.plan-container {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 20px); /* 네비게이션 높이만큼 빼줍니다 */
+}
+
+.category-buttons {
+  display: flex;
+  justify-content: space-between;
+  padding: 25px 0; /* 패딩을 늘려 카테고리 크기 증가 */
+  background-color: #ffffff;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.category-buttons button {
+  padding: 12px 25px; /* 버튼 내부 패딩을 늘려 크기 증가 */
+  font-size: 18px; /* 글자 크기 증가 */
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.category-buttons button:first-child {
+  margin-left: 25%;
+}
+
+.category-buttons button:last-child {
+  margin-right: 25%;
+}
+
+.category-buttons button.active::after {
+  content: "";
+  position: absolute;
+  bottom: -4px; /* 버튼 바로 아래에 밑줄이 그어지도록 조정 */
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: rgb(162, 196, 255);
+}
+
+.subcategory-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  margin-top: 20px; /* 추가된 부분 */
+  padding-bottom: 40px; /* 네비게이션 높이의 2배만큼 여백을 추가합니다 */
+}
+
+.subcategory-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.subcategory-item {
+  background-color: #ffffff;
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.subcategory-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.subcategory-item h3 {
+  margin: 0 0 10px 0;
+  color: #333;
+}
+
+.subcategory-item p {
+  margin: 5px 0;
+  color: #666;
+}
+
+/* 선택된 항목의 스타일 */
+.subcategory-item.selected {
+  background-color: rgb(162, 196, 255);
+  color: white;
+}
+
+.subcategory-item.selected h3,
+.subcategory-item.selected p {
+  color: white;
+}
