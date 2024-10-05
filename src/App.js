@@ -15,6 +15,7 @@ import Login from "./Login";
 import Redirect from "./Redirect";
 import Survey from "./Survey";
 import Start from "./Start";
+import Info from "./Info";
 
 function Layout() {
   const location = useLocation();
@@ -36,6 +37,7 @@ function Layout() {
         <Route path="/login" element={<Login />} />
         <Route path="/oauth" element={<Redirect />} />
         <Route path="/survey" element={<Survey />} />
+        <Route path="/info" element={<Info />} />
       </Routes>
     </div>
   );

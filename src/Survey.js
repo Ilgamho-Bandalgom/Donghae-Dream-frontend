@@ -179,11 +179,9 @@ const Survey = () => {
     // 서버로 POST 요청 보내기
     fetch("https://your-api-endpoint.com/save-survey", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${jwt}`, // JWT를 헤더에 추가
+      body: {
+        surveyResult,
       },
-      body: JSON.stringify(surveyResult), // JSON 데이터 보내기
     })
       .then((response) => response.json())
       .then((data) => {
